@@ -285,3 +285,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 If you encounter any issues or have questions, please open an issue on the GitHub repository.
 
 Happy coding!
+
+### Notice
+please remove the // from the GetinTouch component in line 38 to 49 to call and use the API

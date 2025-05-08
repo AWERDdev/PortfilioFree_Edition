@@ -45,7 +45,7 @@
   
     --accent-primary: #9333ea;
     --accent-hover: #7e22ce;
-    --accent-light: #9333ea1a;
+    --accent-light: rgba(147, 51, 234, 0.1);
     --accent-border: #9333ea;
   
     --border-default: #2d3748;

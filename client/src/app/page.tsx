@@ -1,10 +1,38 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+import React,  { useEffect, useState } from 'react';
+import useNavigation from '@/Tools/Nav'; // Adjust the import path
 import NavBar from '@/components/NavBar';
 import AboutMe from '@/components/AboutMe';
 import Card from '@/components/cards';
 import ProjectCard from '@/components/ProjectCard';
 import Get_In_Touch from '@/components/GetInTouch';
-// import Image from 'next/image'; Import Example 
+
+interface PageProps {
+  url: string;
+}
+
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter(); // Directly initialize useRouter() here
+  const { getInTouchURL, projectsURL } = useNavigation();
+
+  // Ensure the component is mounted on the client-side
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const handleNavigation = ({ url }: PageProps) => {
+    if (router) {
+      router.push(url); // Navigates to the selected URL
+    }
+  };
+
+  if (!isMounted) {
+    return null; // Prevent rendering until the component is mounted
+  }
+
   const Card1 = {
     Job: "Frontend Development",
     stat1: "React & Next.js",
@@ -34,7 +62,6 @@ export default function Home() {
 
   return (
     <main className="w-screen min-h-screen bg-gradient-to-b from-[#0f172a] to-[#1e293b] transition duration-300 overflow-x-hidden">
-      
       {/* Navigation Bar */}
       <div className="NavBar">
         <NavBar />
@@ -42,34 +69,26 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="DescribtionTitle flex justify-evenly items-center mt-32 px-4 flex-wrap">
-      <div className="Image relative w-[180px] h-[180px] flex items-center justify-center rounded-full bg-gray-600 overflow-hidden">
-      {/* Image  Display example */}
-      {/* <Image
-              src={profileImage}
-              alt="Profile image"
-              width={180}
-              height={180}
-              className="rounded-full object-cover"
-            /> */}
-
-    <span className="text-white text-5xl font-bold">?</span>
-
-</div>
-
-
+        <div className="Image relative w-[180px] h-[180px] flex items-center justify-center rounded-full bg-gray-600 overflow-hidden">
+          <span className="text-white text-5xl font-bold">?</span>
+        </div>
         <div className="context text-white">
           <h1 className="text-3xl font-bold mb-2">Software Engineer</h1>
-          <h2 className="text-purple-400 font-semibold mb-3">
-            Specializing in Full-Stack Development
-          </h2>
+          <h2 className="text-purple-400 font-semibold mb-3">Specializing in Full-Stack Development</h2>
           <p className="text-gray-300 mb-6">
             Building robust, scalable applications with modern technologies and best practices.
           </p>
           <div className="flex gap-4">
-            <button className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 md:px-5 md:py-2 rounded-md transition cursor-pointer">
+            <button
+              onClick={() => handleNavigation({ url: getInTouchURL })} // Navigate to 'Get In Touch'
+              className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 md:px-5 md:py-2 rounded-md transition cursor-pointer"
+            >
               Get InTouch
             </button>
-            <button className="border border-purple-400 text-white px-5 py-2 rounded-md hover:bg-gray-700 transition cursor-pointer">
+            <button
+              onClick={() => handleNavigation({ url: projectsURL })} // Navigate to 'View Projects'
+              className="border border-purple-400 text-white px-5 py-2 rounded-md hover:bg-gray-700 transition cursor-pointer"
+            >
               ViewProjects
             </button>
           </div>
@@ -86,7 +105,6 @@ export default function Home() {
         <div className="Title text-white text-center">
           <h1 className="text-[1rem] sm:text-[2rem] font-bold">Skills & Expertise</h1>
         </div>
-
         <div className="Skills_Expertise_Container mt-5 bg-[#111827] grid sm:flex justify-center">
           <Card {...Card1} />
           <Card {...Card2} />
@@ -99,7 +117,6 @@ export default function Home() {
         <div className="Title text-white text-center">
           <h1 className="text-[1rem] sm:text-[2rem] font-bold">Featured Projects</h1>
         </div>
-
         <div className="Projects grid justify-center md:flex md:justify-evenly mt-10">
           <ProjectCard />
           <ProjectCard />
@@ -109,17 +126,18 @@ export default function Home() {
 
       {/* Get In Touch Placeholder */}
       <section className="getInTouch">
-        {/* Add your content here */}
-        <Get_In_Touch/>
+        <Get_In_Touch />
       </section>
-      <section className='Buttombar'>
-      <main className="outline-1 outline-[#1F2937] w-full bg-[#111827] ">
-                <div className="flex justify-center text-center ">
-                    <div className="title ">
-                        <h1 className="text-[1rem] font-bold ml-5 text-gray-500 p-5">© 2025 Alex Morgan. All rights reserved.</h1>
-                    </div>
-                </div>
-            </main>
+
+      {/* Bottom Bar */}
+      <section className="Buttombar">
+        <main className="outline-1 outline-[#1F2937] w-full bg-[#111827]">
+          <div className="flex justify-center text-center">
+            <div className="title">
+              <h1 className="text-[1rem] font-bold ml-5 text-gray-500 p-5">© 2025 Alex Morgan. All rights reserved.</h1>
+            </div>
+          </div>
+        </main>
       </section>
     </main>
   );

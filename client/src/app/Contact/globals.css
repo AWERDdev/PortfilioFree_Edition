@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  /* Light Mode (softwareEngineerLight) */
+  --background: #F9FAFB; /* bg-gray-50 */
+  --foreground: #1F2937; /* text-gray-800 */
+
+  /* Text */
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
+  --text-accent: #0D9488;
+
+  /* Border */
+  --border-primary: #E5E7EB;
+
+  /* Button */
+  --button-primary: #0D9488;
+  --button-primary-hover: #0F766E;
+  --button-secondary: #0D9488;
+  --button-secondary-hover: #F0FDFA;
+
+  /* Card */
+  --card-background: #FFFFFF;
+  --card-tag: #CCFBF1;
+  --card-tag-text: #0D9488;
+
+  /* Form */
+  --form-input-bg: #F9FAFB;
+  --form-input-border: #E5E7EB;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode (softwareEngineerDark) */
+    --background: #111827; /* bg-gray-900 */
+    --foreground: #F3F4F6; /* text-gray-100 */
+
+    /* Text */
+    --text-primary: #F3F4F6;
+    --text-secondary: #D1D5DB;
+    --text-muted: #9CA3AF;
+    --text-accent: #C084FC;
+
+    /* Border */
+    --border-primary: #1F2937;
+
+    /* Button */
+    --button-primary: #9333EA;
+    --button-primary-hover: #7E22CE;
+    --button-secondary: #9333EA;
+    --button-secondary-hover: rgba(147, 51, 234, 0.1); /* hover:bg-purple-600/10 */
+
+    /* Card */
+    --card-background: #1F2937;
+    --card-tag: rgba(88, 28, 135, 0.3);
+    --card-tag-text: #C084FC;
+  }
+}
+
+body,html{
+  overflow-x:hidden;
+  scrollbar-width: thin;
+}
+
+
